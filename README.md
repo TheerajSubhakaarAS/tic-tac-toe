@@ -5,7 +5,7 @@ A classic Tic Tac Toe game implementation using Python. This project provides bo
 ## Tech Stack
 
 - **Programming Language**: Python 3.8+
-- **GUI Framework**: Tkinter (for GUI version)
+- **GUI Framework**: Tkinter
 - **Core Technologies**:
   - Object-Oriented Programming
   - Game Logic Implementation
@@ -41,17 +41,45 @@ tic-tac-toe/
 - Score tracking
 - Game reset functionality
 
-## Getting Started
+## Installation
 
-1. Clone the repository
-2. Install dependencies:
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd tic-tac-toe
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Run the game:
+
+4. Install tkinter (if not already installed):
    ```bash
-   python src/main.py
+   sudo apt-get install python3-tk
    ```
+
+## Usage
+
+### Command Line Version
+
+Run the CLI version:
+```bash
+python src/main.py
+```
+
+### GUI Version
+
+Run the GUI version:
+```bash
+python src/main.py --gui
+```
 
 ## Contributing
 
