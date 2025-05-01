@@ -29,19 +29,20 @@ class Move(BaseModel):
 # Game state storage
 games = {}
 
+# Global players list to maintain scores
+players = [
+    Player("Player 1", "X"),
+    Player("Player 2", "O")
+]
+
 def new_game() -> GameState:
     """Create a new game."""
     game_id = len(games) + 1
     board = Board()
-    players = [
-        Player("Player 1", "X"),
-        Player("Player 2", "O")
-    ]
     current_player = 0
     
     games[game_id] = {
         "board": board,
-        "players": players,
         "current_player": current_player
     }
     
@@ -63,7 +64,6 @@ def make_move(move: Move) -> GameState:
         return new_game()
     
     board = game["board"]
-    players = game["players"]
     current_player = game["current_player"]
     winner = None
     game_over = False
@@ -89,11 +89,32 @@ def make_move(move: Move) -> GameState:
             current_player = 1 - current_player
             game["current_player"] = current_player
     
+    # Return the current game state with win information
     return GameState(
         board=[[Cell(row=r, col=c, value=board.board[r][c]) 
                for c in range(3)] for r in range(3)],
         current_player=players[current_player].symbol,
         winner=winner if winner else None,
         game_over=game_over,
+        score={player.name: player.score for player in players}
+    )
+
+def new_game() -> GameState:
+    """Create a new game."""
+    game_id = len(games) + 1
+    board = Board()
+    current_player = 0
+    
+    games[game_id] = {
+        "board": board,
+        "current_player": current_player
+    }
+    
+    return GameState(
+        board=[[Cell(row=r, col=c, value=board.board[r][c]) 
+               for c in range(3)] for r in range(3)],
+        current_player=players[current_player].symbol,
+        winner=None,
+        game_over=False,
         score={player.name: player.score for player in players}
     )
